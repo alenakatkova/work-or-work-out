@@ -1,7 +1,10 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
-export default function () {
+export default () => {
   return (
-      <div>Work or Work out?</div>
-  )
+    <div>
+      <Link to="/work">Work</Link> or <Link to="/workout">Work out</Link>?
+    </div>
+  );
 };

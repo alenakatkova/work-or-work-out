@@ -1,7 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default class extends React.Component {
-  render() {
-    return <div>Work Out</div>;
-  }
-}
+export default () => {
+  return (
+    <div>
+      <nav>
+        <Link to="/">Go home</Link>
+      </nav>
+      <div>Work Out</div>
+    </div>
+  );
+};
