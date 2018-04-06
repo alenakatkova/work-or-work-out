@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Timer from "./Timer";
 
 export default () => {
   return (
@@ -7,7 +8,8 @@ export default () => {
       <nav>
         <Link to="/">Go home</Link>
       </nav>
-      <div>Work Out</div>
+
+      <Timer />
     </div>
   );
 };
