@@ -1,4 +1,5 @@
 import React from "react";
+import Input from "../Calculator/Input";
 
 export default class extends React.Component {
   state = {
@@ -27,62 +28,44 @@ export default class extends React.Component {
 
   onStartClick = () => {};
 
-  onExcercisesChange = e => {
-    this.setState({ excercises: parseInt(e.target.value) });
-  };
+  onStopClick = () => {};
 
-  onRoundsChange = e => {
-    this.setState({ rounds: parseInt(e.target.value) });
-  };
-
-  onExcerciseTimeChange = e => {
-    this.setState({ excerciseTime: parseInt(e.target.value) });
-  };
-
-  onRelaxTimeChange = e => {
-    this.setState({ relaxTime: parseInt(e.target.value) });
+  onC = (Cname, Cvalue) => {
+    let newState = {};
+    newState[Cname] = parseInt(Cvalue);
+    this.setState(newState);
   };
 
   render() {
     return (
       <div>
         <div>
-          <label htmlFor="excercise-time">Excercise time:</label>
-          <input
-            type="number"
+          <Input
             id="excercise-time"
-            name="excercise-time"
-            onChange={this.onExcerciseTimeChange}
+            name="excerciseTime"
+            label="Excercise time:"
+            onInputChange={this.onC}
           />
 
-          <br />
-
-          <label htmlFor="relax-time">Relax time:</label>
-          <input
-            type="number"
+          <Input
             id="relax-time"
-            name="relax-time"
-            onChange={this.onRelaxTimeChange}
+            name="relaxTime"
+            label="Relax time:"
+            onInputChange={this.onC}
           />
 
-          <br />
-
-          <label htmlFor="excercises">Amount of excercises:</label>
-          <input
-            type="number"
+          <Input
             id="excercises"
             name="excercises"
-            onChange={this.onExcercisesChange}
+            label="Amount of excercises:"
+            onInputChange={this.onC}
           />
 
-          <br />
-
-          <label htmlFor="rounds">Amount of rounds:</label>
-          <input
-            type="number"
+          <Input
             id="rounds"
             name="rounds"
-            onChange={this.onRoundsChange}
+            label="Amount of rounds:"
+            onInputChange={this.onC}
           />
         </div>
 
@@ -94,6 +77,7 @@ export default class extends React.Component {
         </div>
 
         <button onClick={this.onStartClick}>Start</button>
+        <button onClick={this.onStopClick}>Stop</button>
       </div>
     );
   }
