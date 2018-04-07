@@ -30,9 +30,9 @@ export default class extends React.Component {
 
   onStopClick = () => {};
 
-  onC = (Cname, Cvalue) => {
+  onInputChange = (name, value) => {
     let newState = {};
-    newState[Cname] = parseInt(Cvalue);
+    newState[name] = parseInt(value);
     this.setState(newState);
   };
 
@@ -44,28 +44,28 @@ export default class extends React.Component {
             id="excercise-time"
             name="excerciseTime"
             label="Excercise time:"
-            onInputChange={this.onC}
+            onInputChange={this.onInputChange}
           />
 
           <Input
             id="relax-time"
             name="relaxTime"
             label="Relax time:"
-            onInputChange={this.onC}
+            onInputChange={this.onInputChange}
           />
 
           <Input
             id="excercises"
             name="excercises"
             label="Amount of excercises:"
-            onInputChange={this.onC}
+            onInputChange={this.onInputChange}
           />
 
           <Input
             id="rounds"
             name="rounds"
             label="Amount of rounds:"
-            onInputChange={this.onC}
+            onInputChange={this.onInputChange}
           />
         </div>
 
