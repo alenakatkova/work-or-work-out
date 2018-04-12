@@ -2,13 +2,21 @@ import React from "react";
 import Input from "../Calculator/Input";
 
 export default class extends React.Component {
-  state = {
+  intitialState = {
     excerciseTime: 0,
     relaxTime: 0,
     excercises: 0,
     rounds: 0,
-    totalTime: ""
+    totalTime: "",
+    count: {
+      time: 0,
+      status: "not set",
+      round: 1,
+      excercise: 1
+    }
   };
+
+  state = this.intitialState;
 
   getTotalTime = () => {
     const totalTime =
@@ -26,14 +34,41 @@ export default class extends React.Component {
     this.setState({ totalTime: this.getTotalTime() });
   };
 
-  onStartClick = () => {};
+  onStartClick = () => {
+    this.setState(prevState => ({
+      count: {
+        ...prevState.count,
+        status: "started"
+      }
+    }));
 
-  onStopClick = () => {};
+    clearInterval(this.timer);
+
+    this.timer = setInterval(this.tick, 1000);
+  };
+
+  onPauseClick = () => {
+    this.setState(prevState => ({
+      count: {
+        ...prevState.count,
+        status: "paused"
+      }
+    }));
+
+    clearInterval(this.timer);
+  };
 
   onInputChange = (name, value) => {
     let newState = {};
     newState[name] = parseInt(value);
     this.setState(newState);
+  };
+
+  tick = () => {
+    this.setState(prevState => ({
+      count: { ...prevState.count, time: this.state.count.time + 1 }
+    }));
+    console.log(this.state.count.time);
   };
 
   render() {
@@ -80,8 +115,29 @@ export default class extends React.Component {
           {this.state.totalTime ? this.state.totalTime : `__ min __ sec`}
         </div>
 
-        <button onClick={this.onStartClick}>Start</button>
-        <button onClick={this.onStopClick}>Stop</button>
+        <button
+          onClick={this.onStartClick}
+          disabled={this.state.count.status === "started"}
+        >
+          Start
+        </button>
+        <button onClick={this.onPauseClick}>Pause</button>
+
+        {this.state.count.status !== "not set" ? (
+          <div>
+            <div>Round №{this.state.count.round}</div>
+            <div>Excercise №{this.state.count.excercise}</div>
+            <div>
+              <span>
+                {Math.floor(this.state.count.time / 60)
+                  ? Math.floor(this.state.count.time / 60)
+                  : "00"}
+              </span>:<span>{this.state.count.time % 60}</span>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
