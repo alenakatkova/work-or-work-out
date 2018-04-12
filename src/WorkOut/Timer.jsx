@@ -43,15 +43,17 @@ export default class extends React.Component {
           <Input
             id="excercise-time"
             name="excerciseTime"
-            label="Excercise time:"
+            label="Excercise time, sec:"
             onInputChange={this.onInputChange}
+            onEnterPress={this.onCalculateClick}
           />
 
           <Input
             id="relax-time"
             name="relaxTime"
-            label="Relax time:"
+            label="Relax time, sec:"
             onInputChange={this.onInputChange}
+            onEnterPress={this.onCalculateClick}
           />
 
           <Input
@@ -59,6 +61,7 @@ export default class extends React.Component {
             name="excercises"
             label="Amount of excercises:"
             onInputChange={this.onInputChange}
+            onEnterPress={this.onCalculateClick}
           />
 
           <Input
@@ -66,6 +69,7 @@ export default class extends React.Component {
             name="rounds"
             label="Amount of rounds:"
             onInputChange={this.onInputChange}
+            onEnterPress={this.onCalculateClick}
           />
         </div>
 
