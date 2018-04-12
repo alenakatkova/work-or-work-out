@@ -7,7 +7,7 @@ export default class extends React.Component {
     relaxTime: 0,
     excercises: 0,
     rounds: 0,
-    totalTime: "",
+    totalTime: 0,
     count: {
       time: 0,
       status: "not set",
@@ -19,15 +19,11 @@ export default class extends React.Component {
   state = this.intitialState;
 
   getTotalTime = () => {
-    const totalTime =
+    return (
       (this.state.excerciseTime + this.state.relaxTime) *
       this.state.excercises *
-      this.state.rounds;
-
-    const minutes = Math.floor(totalTime / 60);
-    const seconds = totalTime % 60;
-
-    return `${minutes} min ${seconds} sec`;
+      this.state.rounds
+    );
   };
 
   onCalculateClick = () => {
@@ -65,9 +61,25 @@ export default class extends React.Component {
   };
 
   tick = () => {
-    this.setState(prevState => ({
-      count: { ...prevState.count, time: this.state.count.time + 1 }
-    }));
+    this.setState(
+      prevState => ({
+        count: { ...prevState.count, time: this.state.count.time + 1 }
+      }),
+      () => {
+        if (
+          this.state.count.time %
+            (this.state.excerciseTime + this.state.relaxTime) ===
+          0
+        ) {
+          this.setState(prevState => ({
+            count: {
+              ...prevState.count,
+              excercise: this.state.count.excercise + 1
+            }
+          }));
+        }
+      }
+    );
     console.log(this.state.count.time);
   };
 
@@ -112,7 +124,10 @@ export default class extends React.Component {
 
         <div>
           Your workout will last{" "}
-          {this.state.totalTime ? this.state.totalTime : `__ min __ sec`}
+          {this.state.totalTime
+            ? `${Math.floor(this.state.totalTime / 60)} min ${this.state
+                .totalTime % 60} sec`
+            : `__ min __ sec`}
         </div>
 
         <button
