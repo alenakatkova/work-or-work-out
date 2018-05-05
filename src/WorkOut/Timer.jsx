@@ -60,27 +60,40 @@ export default class extends React.Component {
     this.setState(newState);
   };
 
+  countExcercises = () => {
+    if (
+      this.state.count.time %
+        (this.state.excerciseTime + this.state.relaxTime) ===
+      0
+    ) {
+      if (this.state.count.excercise % this.state.excercises === 0) {
+        console.log(this.state.count.round);
+        this.setState(prevState => ({
+          count: {
+            ...prevState.count,
+            round: this.state.count.round + 1,
+            excercise: 1
+          }
+        }));
+      } else {
+        this.setState(prevState => ({
+          count: {
+            ...prevState.count,
+            excercise: this.state.count.excercise + 1
+          }
+        }));
+      }
+    }
+  };
+
   tick = () => {
+    console.log(this.state.count.time);
     this.setState(
       prevState => ({
         count: { ...prevState.count, time: this.state.count.time + 1 }
       }),
-      () => {
-        if (
-          this.state.count.time %
-            (this.state.excerciseTime + this.state.relaxTime) ===
-          0
-        ) {
-          this.setState(prevState => ({
-            count: {
-              ...prevState.count,
-              excercise: this.state.count.excercise + 1
-            }
-          }));
-        }
-      }
+      this.countExcercises
     );
-    console.log(this.state.count.time);
   };
 
   render() {
