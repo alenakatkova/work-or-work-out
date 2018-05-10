@@ -21,6 +21,7 @@ export default class extends React.Component {
           name={this.props.name}
           onChange={this.onInputChange}
           onKeyDown={this.onEnterPress}
+          value={this.props.value}
         />
       </div>
     );

@@ -8,7 +8,6 @@ export default () => {
       <nav>
         <Link to="/">Go home</Link>
       </nav>
-
       <Timer />
     </div>
   );
